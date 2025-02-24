@@ -6,20 +6,23 @@ void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(MyApp());
-
-    // Tunggu sampai semua widget ter-render
+    
+    // Tunggu sampai semua widget selesai di-render.
     await tester.pumpAndSettle(); 
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);  // Memastikan bahwa "0" ditemukan
-    expect(find.text('1'), findsNothing);   // Memastikan bahwa "1" tidak ditemukan
+    // Verifikasi bahwa counter mulai dengan angka 0.
+    expect(find.text('0'), findsOneWidget);  // Pastikan ada widget dengan teks "0"
+    expect(find.text('1'), findsNothing);   // Pastikan belum ada widget dengan teks "1"
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));  // Menekan tombol '+' untuk menambah counter
-    await tester.pump();  // Memperbarui UI setelah interaksi
+    // Tap ikon '+' dan trigger frame untuk memperbarui UI.
+    await tester.tap(find.byIcon(Icons.add)); 
+    await tester.pump();  // Perbarui UI setelah interaksi
+    
+    // Tunggu sampai semua widget selesai di-render setelah update.
+    await tester.pumpAndSettle(); 
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);  // Memastikan bahwa "0" sudah tidak ada
-    expect(find.text('1'), findsOneWidget); // Memastikan bahwa "1" ada
+    // Verifikasi bahwa counter telah bertambah.
+    expect(find.text('0'), findsNothing);  // Pastikan "0" sudah tidak ada
+    expect(find.text('1'), findsOneWidget); // Pastikan "1" sekarang ada
   });
 }
