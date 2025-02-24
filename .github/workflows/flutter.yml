@@ -25,7 +25,7 @@ jobs:
 
       # Menjalankan unit tests
       - name: Run tests
-        run: flutter test
+        run: flutter test --no-pub
 
       # Membangun APK untuk aplikasi Android
       - name: Build APK
