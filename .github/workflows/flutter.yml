@@ -1,0 +1,32 @@
+name: Flutter CI/CD
+
+on:
+  push:
+    branches:
+      - main  # Mengatur agar workflow berjalan setiap ada perubahan di branch main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Menjalankan job di lingkungan Ubuntu
+
+    steps:
+      # Checkout kode dari repositori
+      - uses: actions/checkout@v2
+
+      # Menyiapkan Flutter SDK
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 'stable'  # Menggunakan versi stable dari Flutter
+
+      # Menginstal dependensi
+      - name: Install dependencies
+        run: flutter pub get
+
+      # Menjalankan unit tests
+      - name: Run tests
+        run: flutter test
+
+      # Membangun APK untuk aplikasi Android
+      - name: Build APK
+        run: flutter build apk
